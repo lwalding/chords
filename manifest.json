@@ -5,15 +5,15 @@
       "day_number": 1,
       "week_number": 1,
       "key": "F",
-      "progression": "ii \u2013 V \u2013 I",
-      "stage": "Basic Triads",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Basic Voicings",
       "levels": [
         "basic"
       ],
       "chords": [
-        "Gm7",
-        "C7",
-        "Fmaj7"
+        "F7",
+        "Bb7",
+        "C7"
       ],
       "file": "days/2026-04-02.html"
     },
@@ -22,15 +22,15 @@
       "day_number": 2,
       "week_number": 1,
       "key": "Bb",
-      "progression": "ii \u2013 V \u2013 I",
-      "stage": "Basic Triads",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Basic Voicings",
       "levels": [
         "basic"
       ],
       "chords": [
-        "Cm7",
-        "F7",
-        "Bbmaj7"
+        "Bb7",
+        "Eb7",
+        "F7"
       ],
       "file": "days/2026-04-03.html"
     },
@@ -39,15 +39,16 @@
       "day_number": 3,
       "week_number": 1,
       "key": "G",
-      "progression": "ii \u2013 V \u2013 I",
-      "stage": "Basic Triads",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Basic Voicings",
       "levels": [
         "basic"
       ],
       "chords": [
+        "Gmaj7",
+        "Em7",
         "Am7",
-        "D7",
-        "Gmaj7"
+        "D7"
       ],
       "file": "days/2026-04-04.html"
     },
@@ -56,15 +57,16 @@
       "day_number": 4,
       "week_number": 1,
       "key": "F",
-      "progression": "ii \u2013 V \u2013 I",
-      "stage": "Basic Triads",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Basic Voicings",
       "levels": [
         "basic"
       ],
       "chords": [
+        "Fmaj7",
+        "Dm7",
         "Gm7",
-        "C7",
-        "Fmaj7"
+        "C7"
       ],
       "file": "days/2026-04-05.html"
     }

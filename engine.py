@@ -252,16 +252,16 @@ GUITAR_VOICINGS = {
     # ─── E-string root shapes ───
     'maj_E': {'frets': [0, 'x', (2, '5'), (1, 'R'), (0, '3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'basic'},
     'min_E': {'frets': [0, 'x', (2, '5'), (0, 'b3'), (0, 'b3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'basic'},
-    'dom7_E': {'frets': [0, 'x', (1, 'b7'), (1, 'R'), (0, '3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'intermediate'},
-    'maj7_E': {'frets': [0, 'x', (1, 'b7'), (1, 'R'), (1, '3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'intermediate'},
-    'min7_E': {'frets': [0, 'x', (2, '5'), (0, 'b7'), (0, 'b3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'intermediate'},
+    'dom7_E': {'frets': [0, 'x', (1, 'b7'), (1, 'R'), (0, '3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'basic'},
+    'maj7_E': {'frets': [0, 'x', (1, 'b7'), (1, 'R'), (1, '3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'basic'},
+    'min7_E': {'frets': [0, 'x', (2, '5'), (0, 'b7'), (0, 'b3'), 0], 'root_string': 0, 'name': 'E Shape', 'level': 'basic'},
 
     # ─── A-string root shapes ───
     'maj_A': {'frets': ['x', 0, (2, '5'), (2, 'R'), (2, '3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'basic'},
     'min_A': {'frets': ['x', 0, (2, '5'), (2, 'R'), (1, 'b3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'basic'},
-    'dom7_A': {'frets': ['x', 0, (2, '5'), 0, (2, '3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'intermediate'},
-    'maj7_A': {'frets': ['x', 0, (2, '5'), (1, '7'), (2, '3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'intermediate'},
-    'min7_A': {'frets': ['x', 0, (2, '5'), 0, (1, 'b3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'intermediate'},
+    'dom7_A': {'frets': ['x', 0, (2, '5'), 0, (2, '3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'basic'},
+    'maj7_A': {'frets': ['x', 0, (2, '5'), (1, '7'), (2, '3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'basic'},
+    'min7_A': {'frets': ['x', 0, (2, '5'), 0, (1, 'b3'), 0], 'root_string': 1, 'name': 'A Shape', 'level': 'basic'},
 
     # ─── Drop 2 shapes (D-G-B-E strings) ───
     'maj7_drop2': {'frets': ['x', 'x', 0, (2, '5'), (1, '7'), (2, '3')], 'root_string': 2, 'name': 'Drop 2', 'level': 'intermediate'},
@@ -414,12 +414,12 @@ def realize_progression(prog_key, root_key, octave=3):
 # ─── Curriculum ──────────────────────────────────────────────────
 
 CURRICULUM = [
-    # Week 1-2: Basic triads, ii-V-I in easy keys
-    {'weeks': (1, 2), 'levels': ['basic'], 'progressions': ['ii-V-I'],
-     'keys': ['C', 'F', 'G', 'Bb', 'Eb', 'D'], 'description': 'Basic Triads'},
+    # Week 1-2: Basic voicings, ii-V-I and turnarounds in easy keys
+    {'weeks': (1, 2), 'levels': ['basic'], 'progressions': ['ii-V-I', 'I-vi-ii-V', 'blues-basic'],
+     'keys': ['C', 'F', 'G', 'Bb', 'Eb', 'D'], 'description': 'Basic Voicings'},
 
     # Week 3-4: Shell voicings
-    {'weeks': (3, 4), 'levels': ['basic', 'intermediate'], 'progressions': ['ii-V-I', 'blues-basic'],
+    {'weeks': (3, 4), 'levels': ['basic', 'intermediate'], 'progressions': ['ii-V-I', 'I-vi-ii-V', 'blues-basic'],
      'keys': ['C', 'F', 'Bb', 'Eb', 'Ab', 'G', 'D'], 'description': 'Shell Voicings'},
 
     # Week 5-6: Drop 2 voicings, turnarounds
