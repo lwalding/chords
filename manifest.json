@@ -86,6 +86,23 @@
         "Fmaj7"
       ],
       "file": "days/2026-04-06.html"
+    },
+    {
+      "date": "2026-04-07",
+      "day_number": 6,
+      "week_number": 1,
+      "key": "Eb",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Basic Voicings",
+      "levels": [
+        "basic"
+      ],
+      "chords": [
+        "Fm7",
+        "Bb7",
+        "Ebmaj7"
+      ],
+      "file": "days/2026-04-07.html"
     }
   ]
 }
