@@ -208,6 +208,23 @@
         "D7"
       ],
       "file": "days/2026-04-13.html"
+    },
+    {
+      "date": "2026-04-14",
+      "day_number": 13,
+      "week_number": 2,
+      "key": "C",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Basic Voicings",
+      "levels": [
+        "basic"
+      ],
+      "chords": [
+        "Dm7",
+        "G7",
+        "Cmaj7"
+      ],
+      "file": "days/2026-04-14.html"
     }
   ]
 }
