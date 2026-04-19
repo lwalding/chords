@@ -298,6 +298,24 @@
         "D7"
       ],
       "file": "days/2026-04-18.html"
+    },
+    {
+      "date": "2026-04-19",
+      "day_number": 18,
+      "week_number": 3,
+      "key": "G",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Shell Voicings",
+      "levels": [
+        "basic",
+        "intermediate"
+      ],
+      "chords": [
+        "Am7",
+        "D7",
+        "Gmaj7"
+      ],
+      "file": "days/2026-04-19.html"
     }
   ]
 }
