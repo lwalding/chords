@@ -335,6 +335,24 @@
         "Bb7"
       ],
       "file": "days/2026-04-20.html"
+    },
+    {
+      "date": "2026-04-21",
+      "day_number": 20,
+      "week_number": 3,
+      "key": "F",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Shell Voicings",
+      "levels": [
+        "basic",
+        "intermediate"
+      ],
+      "chords": [
+        "Gm7",
+        "C7",
+        "Fmaj7"
+      ],
+      "file": "days/2026-04-21.html"
     }
   ]
 }
