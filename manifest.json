@@ -353,6 +353,24 @@
         "Fmaj7"
       ],
       "file": "days/2026-04-21.html"
+    },
+    {
+      "date": "2026-04-22",
+      "day_number": 21,
+      "week_number": 3,
+      "key": "D",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Shell Voicings",
+      "levels": [
+        "basic",
+        "intermediate"
+      ],
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7"
+      ],
+      "file": "days/2026-04-22.html"
     }
   ]
 }
