@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 24 — Blues (I – IV – V) in Ab</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #0f0f1a;
+    color: #ccccdd;
+    min-height: 100vh;
+    padding: 50px 30px;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .header h1 {
+    font-size: 32px; font-weight: 700; color: #e8e8f0;
+    letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 15px; color: #8888aa;
+    font-weight: 300; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .header .day-info {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #6c63ff; margin-top: 12px; letter-spacing: 1px;
+  }
+  .header .stage-badge {
+    display: inline-block; margin-top: 14px; padding: 6px 16px;
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 20px; font-size: 11px; color: #6c63ff;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+  }
+  .header .prog-desc {
+    font-size: 13px; color: #666680; margin-top: 10px;
+    font-style: italic;
+  }
+
+  .section {
+    margin-bottom: 50px;
+  }
+  .section-label {
+    font-size: 11px; font-weight: 600; color: #8888aa;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 24px; padding-left: 4px;
+  }
+
+  .chord-group {
+    margin-bottom: 30px;
+  }
+  .chord-group-label {
+    font-size: 16px; font-weight: 600; color: #e8e8f0;
+    margin-bottom: 14px; padding-left: 4px;
+  }
+  .chord-group-label .degree {
+    font-weight: 300; color: #8888aa; font-size: 13px;
+  }
+
+  .cards {
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+  .card {
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 16px; padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 15px rgba(108, 99, 255, 0.3);
+  }
+
+  .notes-row {
+    text-align: center; margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: #666680; letter-spacing: 1px;
+  }
+  .voicing-desc {
+    text-align: center; margin-top: 6px; font-size: 11px;
+    color: #666680; max-width: 220px;
+  }
+
+  /* Audio controls */
+  .audio-controls {
+    display: flex; gap: 8px; margin-top: 12px; justify-content: center;
+  }
+  .play-btn, .arp-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid #2a2a4a; background: #0f0f1a;
+    color: #6c63ff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .play-btn:hover, .arp-btn:hover {
+    background: #6c63ff; color: #0f0f1a;
+    box-shadow: 0 0 12px rgba(108, 99, 255, 0.3);
+  }
+  .play-btn:active, .arp-btn:active {
+    transform: scale(0.9);
+  }
+
+  /* Rating tags */
+  .rating-row {
+    display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tag-btn {
+    padding: 3px 10px; border-radius: 12px; border: 1px solid #2a2a4a;
+    background: transparent; color: #666680;
+    font-size: 10px; cursor: pointer; transition: all 0.2s;
+    font-family: 'Inter', sans-serif; letter-spacing: 0.5px;
+  }
+  .tag-btn:hover {
+    border-color: #6c63ff; color: #6c63ff;
+  }
+  .tag-btn.active {
+    background: #6c63ff; color: #0f0f1a;
+    border-color: #6c63ff; font-weight: 600;
+  }
+
+  /* Overall rating */
+  .day-rating {
+    text-align: center; margin-top: 40px; padding: 30px;
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 16px;
+  }
+  .day-rating-label {
+    font-size: 13px; color: #8888aa; margin-bottom: 12px;
+    letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
+  }
+  .stars {
+    display: flex; gap: 8px; justify-content: center;
+  }
+  .star-btn {
+    width: 40px; height: 40px; border-radius: 8px;
+    border: 1px solid #2a2a4a; background: transparent;
+    color: #666680; font-size: 20px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .star-btn:hover, .star-btn.active {
+    color: #6c63ff; border-color: #6c63ff;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+  }
+  .notes-field {
+    margin-top: 16px;
+  }
+  .notes-field textarea {
+    width: 100%; max-width: 500px; height: 60px; padding: 10px;
+    background: #0f0f1a; border: 1px solid #2a2a4a;
+    border-radius: 8px; color: #ccccdd; font-family: 'Inter', sans-serif;
+    font-size: 13px; resize: vertical;
+  }
+  .notes-field textarea::placeholder { color: #666680; }
+  .save-btn {
+    margin-top: 12px; padding: 8px 24px; border-radius: 8px;
+    border: 1px solid #6c63ff; background: transparent;
+    color: #6c63ff; cursor: pointer; font-family: 'Inter', sans-serif;
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .save-btn:hover {
+    background: #6c63ff; color: #0f0f1a;
+  }
+  .save-status {
+    margin-top: 8px; font-size: 11px; color: #6c63ff;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .save-status.show { opacity: 1; }
+
+  .nav-link {
+    display: inline-block; margin-top: 20px; color: #6c63ff;
+    text-decoration: none; font-size: 13px; letter-spacing: 1px;
+  }
+  .nav-link:hover { text-decoration: underline; }
+
+  .footer {
+    text-align: center; margin-top: 60px; padding-top: 30px;
+    border-top: 1px solid #2a2a4a;
+    font-size: 11px; color: #666680; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Blues (I – IV – V) in Ab</h1>
+    <div class="subtitle">Shell Voicings</div>
+    <div class="day-info">Day 24 · Week 4 · April 25, 2026</div>
+    <div class="stage-badge">Levels: basic · intermediate</div>
+    <div class="prog-desc">Basic blues changes</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Piano Voicings</div>
+    <div class="chord-group">
+      <div class="chord-group-label">Ab7 <span class="degree">(I)</span></div>
+      <div class="cards">
+      <div class="card" id="card-p0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="210" viewBox="0 0 900 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="450.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="450.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Root Position</text>
+<rect x="28" y="60" width="844" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="464.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">C4</text>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="660" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="690" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="720" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="750" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="780" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="810" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="840" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="378.9" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Ab3</text>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="501.6" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Eb4</text>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="557.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Gb4</text>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="667.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="701.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="757.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="788.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="821.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Ab3 · C4 · Eb4 · Gb4</div>
+        <div class="voicing-desc">All chord tones stacked from the root</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p0')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p0')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p0">
+          <button class="tag-btn" onclick="rate('p0','love')">love</button>
+          <button class="tag-btn" onclick="rate('p0','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p0','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p0','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p0','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p0','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-p1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="210" viewBox="0 0 900 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="450.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="450.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell Voicing</text>
+<rect x="28" y="60" width="844" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="464.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">C4</text>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="660" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="690" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="720" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="750" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="780" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="810" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="840" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="378.9" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Ab3</text>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="557.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Gb4</text>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="667.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="701.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="757.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="788.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="821.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Ab3 · C4 · Gb4</div>
+        <div class="voicing-desc">Root + guide tones (3rd & 7th)</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p1')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p1')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p1">
+          <button class="tag-btn" onclick="rate('p1','love')">love</button>
+          <button class="tag-btn" onclick="rate('p1','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p1','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p1','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p1','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p1','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-p2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="210" viewBox="0 0 900 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="450.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="450.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Drop 2</text>
+<rect x="28" y="60" width="844" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="464.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">C4</text>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="660" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="690" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="720" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="750" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="780" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="810" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="840" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="291.6" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Eb3</text>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="378.9" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Ab3</text>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="557.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Gb4</text>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="667.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="701.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="757.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="788.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="821.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Eb3 · Ab3 · C4 · Gb4</div>
+        <div class="voicing-desc">Close voicing with 2nd voice dropped an octave — open, spread sound</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p2')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p2')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p2">
+          <button class="tag-btn" onclick="rate('p2','love')">love</button>
+          <button class="tag-btn" onclick="rate('p2','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p2','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p2','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p2','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p2','too complex')">too complex</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="chord-group">
+      <div class="chord-group-label">Db7 <span class="degree">(IV)</span></div>
+      <div class="cards">
+      <div class="card" id="card-p3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="690" height="210" viewBox="0 0 690 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="345.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="345.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Root Position</text>
+<rect x="28" y="60" width="634" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="344.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">F3</text>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="434.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">B3</text>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="257.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Db3</text>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="378.9" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Ab3</text>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Db3 · F3 · Ab3 · B3</div>
+        <div class="voicing-desc">All chord tones stacked from the root</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p3')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p3')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p3">
+          <button class="tag-btn" onclick="rate('p3','love')">love</button>
+          <button class="tag-btn" onclick="rate('p3','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p3','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p3','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p3','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p3','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-p4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="690" height="210" viewBox="0 0 690 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="345.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="345.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell Voicing</text>
+<rect x="28" y="60" width="634" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="344.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">F3</text>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="434.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">B3</text>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="257.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Db3</text>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Db3 · F3 · B3</div>
+        <div class="voicing-desc">Root + guide tones (3rd & 7th)</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p4')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p4')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p4">
+          <button class="tag-btn" onclick="rate('p4','love')">love</button>
+          <button class="tag-btn" onclick="rate('p4','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p4','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p4','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p4','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p4','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-p5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="210" viewBox="0 0 900 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="450.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="450.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Drop 2</text>
+<rect x="28" y="60" width="844" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="554.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">F3</text>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="644.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">B3</text>
+<rect x="660" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="690" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="720" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="750" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="780" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="810" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="840" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="378.9" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Ab2</text>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="467.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Db3</text>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="667.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="701.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="757.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="788.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="821.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Ab2 · Db3 · F3 · B3</div>
+        <div class="voicing-desc">Close voicing with 2nd voice dropped an octave — open, spread sound</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p5')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p5')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p5">
+          <button class="tag-btn" onclick="rate('p5','love')">love</button>
+          <button class="tag-btn" onclick="rate('p5','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p5','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p5','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p5','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p5','too complex')">too complex</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="chord-group">
+      <div class="chord-group-label">Eb7 <span class="degree">(V)</span></div>
+      <div class="cards">
+      <div class="card" id="card-p6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="210" viewBox="0 0 900 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="450.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="450.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Root Position</text>
+<rect x="28" y="60" width="844" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="374.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">G3</text>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="660" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="690" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="720" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="750" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="780" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="810" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="840" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="291.6" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Eb3</text>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="411.6" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Bb3</text>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="467.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Db4</text>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="667.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="701.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="757.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="788.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="821.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Eb3 · G3 · Bb3 · Db4</div>
+        <div class="voicing-desc">All chord tones stacked from the root</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p6')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p6')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p6">
+          <button class="tag-btn" onclick="rate('p6','love')">love</button>
+          <button class="tag-btn" onclick="rate('p6','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p6','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p6','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p6','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p6','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-p7">
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="210" viewBox="0 0 900 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="450.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="450.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell Voicing</text>
+<rect x="28" y="60" width="844" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="374.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">G3</text>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="660" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="690" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="720" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="750" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="780" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="810" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="840" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="291.6" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Eb3</text>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="467.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Db4</text>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="667.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="701.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="757.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="788.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="821.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Eb3 · G3 · Db4</div>
+        <div class="voicing-desc">Root + guide tones (3rd & 7th)</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p7')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p7')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p7">
+          <button class="tag-btn" onclick="rate('p7','love')">love</button>
+          <button class="tag-btn" onclick="rate('p7','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p7','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p7','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p7','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p7','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-p8">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1110" height="210" viewBox="0 0 1110 210">
+<defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="whiteKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#e8e8ee"/>
+      </linearGradient>
+      <linearGradient id="blackKeyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#333"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+<text x="555.0" y="28" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="555.0" y="46" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Drop 2</text>
+<rect x="28" y="60" width="1054" height="114" rx="4" fill="rgba(0,0,0,0.3)" filter="url(#glow)"/>
+<rect x="30" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="60" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="90" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="120" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="150" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="180" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="210" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="240" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="270" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="300" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="330" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="360" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="390" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="420" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="450" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="480" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="510" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="540" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="570" y="58" width="29" height="110" rx="3" fill="#6c63ff" filter="url(#glow)"/>
+<text x="584.5" y="156" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="10" fill="white" font-weight="600">G3</text>
+<rect x="600" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="630" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="660" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="690" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="720" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="750" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="780" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="810" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="840" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="870" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="900" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="930" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="960" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="990" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="1020" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="1050" y="58" width="29" height="110" rx="3" fill="url(#whiteKeyGrad)" stroke="#d0d0dd" stroke-width="0.5"/>
+<rect x="37.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="71.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="127.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="158.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="191.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="247.39999999999998" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="281.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="337.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="368.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="401.6" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="411.6" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Bb2</text>
+<rect x="457.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="491.6" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="501.6" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Eb3</text>
+<rect x="547.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="578.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="611.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="667.4" y="58" width="20" height="68" rx="3" fill="#ff6b6b" filter="url(#glow)"/>
+<text x="677.4" y="116" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="8" fill="white" font-weight="600">Db4</text>
+<rect x="701.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="757.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="788.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="821.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="877.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="911.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="967.4" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="998.9" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+<rect x="1031.6" y="58" width="20" height="68" rx="3" fill="url(#blackKeyGrad)" stroke="#000" stroke-width="0.5"/>
+</svg>
+        <div class="notes-row">Bb2 · Eb3 · G3 · Db4</div>
+        <div class="voicing-desc">Close voicing with 2nd voice dropped an octave — open, spread sound</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('p8')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('p8')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="p8">
+          <button class="tag-btn" onclick="rate('p8','love')">love</button>
+          <button class="tag-btn" onclick="rate('p8','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('p8','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('p8','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('p8','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('p8','too complex')">too complex</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <div class="section-label">Guitar Voicings</div>
+    <div class="chord-group">
+      <div class="chord-group-label">Ab7 <span class="degree">(I)</span></div>
+      <div class="cards">
+      <div class="card" id="card-g9">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">E Shape</text>
+<rect x="38" y="66" width="124" height="5" rx="2" fill="#e8e8f0"/>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<circle cx="40" cy="175.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="40" cy="175.0" r="8" fill="#6c63ff" />
+<circle cx="40" cy="175.0" r="8" fill="url(#dotGrad)"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="205.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="205.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="205.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="209.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="205.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="205.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="205.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="209.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">R</text>
+<circle cx="136" cy="175.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="175.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="175.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="179.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<circle cx="160" cy="175.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="175.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="175.0" r="8" fill="url(#dotGrad)"/>
+</svg>
+        <div class="voicing-desc">E Shape voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g9')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g9')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g9">
+          <button class="tag-btn" onclick="rate('g9','love')">love</button>
+          <button class="tag-btn" onclick="rate('g9','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g9','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g9','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g9','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g9','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g10">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">A Shape</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">11fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="64" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="64" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="64" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="88" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">5</text>
+<circle cx="112" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="136" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<circle cx="160" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="85.0" r="8" fill="url(#dotGrad)"/>
+</svg>
+        <div class="voicing-desc">A Shape voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g10')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g10')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g10">
+          <button class="tag-btn" onclick="rate('g10','love')">love</button>
+          <button class="tag-btn" onclick="rate('g10','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g10','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g10','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g10','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g10','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g11">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Drop 2</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">6fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">5</text>
+<circle cx="136" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="160" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="160" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+</svg>
+        <div class="voicing-desc">Drop 2 voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g11')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g11')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g11">
+          <button class="tag-btn" onclick="rate('g11','love')">love</button>
+          <button class="tag-btn" onclick="rate('g11','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g11','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g11','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g11','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g11','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g12">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell (6th str)</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">4fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<circle cx="40" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="40" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="40" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<line x1="131" y1="51" x2="141" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="141" y1="51" x2="131" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="155" y1="51" x2="165" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="165" y1="51" x2="155" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+        <div class="voicing-desc">Shell (6th str) voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g12')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g12')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g12">
+          <button class="tag-btn" onclick="rate('g12','love')">love</button>
+          <button class="tag-btn" onclick="rate('g12','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g12','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g12','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g12','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g12','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g13">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Ab7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell (5th str)</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">11fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="64" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="64" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="64" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<line x1="131" y1="51" x2="141" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="141" y1="51" x2="131" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="155" y1="51" x2="165" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="165" y1="51" x2="155" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+        <div class="voicing-desc">Shell (5th str) voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g13')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g13')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g13">
+          <button class="tag-btn" onclick="rate('g13','love')">love</button>
+          <button class="tag-btn" onclick="rate('g13','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g13','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g13','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g13','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g13','too complex')">too complex</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="chord-group">
+      <div class="chord-group-label">Db7 <span class="degree">(IV)</span></div>
+      <div class="cards">
+      <div class="card" id="card-g14">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">E Shape</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">9fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<circle cx="40" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="40" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="40" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">R</text>
+<circle cx="136" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="89.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<circle cx="160" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="85.0" r="8" fill="url(#dotGrad)"/>
+</svg>
+        <div class="voicing-desc">E Shape voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g14')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g14')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g14">
+          <button class="tag-btn" onclick="rate('g14','love')">love</button>
+          <button class="tag-btn" onclick="rate('g14','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g14','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g14','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g14','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g14','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g15">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">A Shape</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">4fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="64" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="64" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="64" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="88" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">5</text>
+<circle cx="112" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="136" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<circle cx="160" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="85.0" r="8" fill="url(#dotGrad)"/>
+</svg>
+        <div class="voicing-desc">A Shape voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g15')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g15')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g15">
+          <button class="tag-btn" onclick="rate('g15','love')">love</button>
+          <button class="tag-btn" onclick="rate('g15','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g15','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g15','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g15','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g15','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Drop 2</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">11fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">5</text>
+<circle cx="136" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="160" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="160" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+</svg>
+        <div class="voicing-desc">Drop 2 voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g16')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g16')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g16">
+          <button class="tag-btn" onclick="rate('g16','love')">love</button>
+          <button class="tag-btn" onclick="rate('g16','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g16','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g16','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g16','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g16','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g17">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell (6th str)</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">9fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<circle cx="40" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="40" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="40" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<line x1="131" y1="51" x2="141" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="141" y1="51" x2="131" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="155" y1="51" x2="165" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="165" y1="51" x2="155" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+        <div class="voicing-desc">Shell (6th str) voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g17')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g17')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g17">
+          <button class="tag-btn" onclick="rate('g17','love')">love</button>
+          <button class="tag-btn" onclick="rate('g17','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g17','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g17','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g17','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g17','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g18">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Db7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell (5th str)</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">4fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="64" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="64" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="64" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<line x1="131" y1="51" x2="141" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="141" y1="51" x2="131" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="155" y1="51" x2="165" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="165" y1="51" x2="155" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+        <div class="voicing-desc">Shell (5th str) voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g18')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g18')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g18">
+          <button class="tag-btn" onclick="rate('g18','love')">love</button>
+          <button class="tag-btn" onclick="rate('g18','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g18','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g18','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g18','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g18','too complex')">too complex</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="chord-group">
+      <div class="chord-group-label">Eb7 <span class="degree">(V)</span></div>
+      <div class="cards">
+      <div class="card" id="card-g19">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">E Shape</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">11fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<circle cx="40" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="40" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="40" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">R</text>
+<circle cx="136" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="89.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<circle cx="160" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="85.0" r="8" fill="url(#dotGrad)"/>
+</svg>
+        <div class="voicing-desc">E Shape voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g19')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g19')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g19">
+          <button class="tag-btn" onclick="rate('g19','love')">love</button>
+          <button class="tag-btn" onclick="rate('g19','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g19','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g19','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g19','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g19','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">A Shape</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">6fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="64" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="64" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="64" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="88" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">5</text>
+<circle cx="112" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="136" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<circle cx="160" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="85.0" r="8" fill="url(#dotGrad)"/>
+</svg>
+        <div class="voicing-desc">A Shape voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g20')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g20')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g20">
+          <button class="tag-btn" onclick="rate('g20','love')">love</button>
+          <button class="tag-btn" onclick="rate('g20','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g20','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g20','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g20','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g20','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g21">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Drop 2</text>
+<rect x="38" y="66" width="124" height="5" rx="2" fill="#e8e8f0"/>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">5</text>
+<circle cx="136" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="136" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="136" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="136" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="160" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="160" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="160" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="160" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+</svg>
+        <div class="voicing-desc">Drop 2 voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g21')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g21')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g21">
+          <button class="tag-btn" onclick="rate('g21','love')">love</button>
+          <button class="tag-btn" onclick="rate('g21','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g21','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g21','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g21','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g21','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g22">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell (6th str)</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">11fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<circle cx="40" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="40" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="40" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<line x1="59" y1="51" x2="69" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="69" y1="51" x2="59" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<line x1="131" y1="51" x2="141" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="141" y1="51" x2="131" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="155" y1="51" x2="165" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="165" y1="51" x2="155" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+        <div class="voicing-desc">Shell (6th str) voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g22')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g22')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g22">
+          <button class="tag-btn" onclick="rate('g22','love')">love</button>
+          <button class="tag-btn" onclick="rate('g22','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g22','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g22','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g22','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g22','too complex')">too complex</button>
+        </div>
+      </div>
+      <div class="card" id="card-g23">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+<defs>
+      <filter id="dotglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="dotGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+<text x="100.0" y="24" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" fill="#e8e8f0" letter-spacing="1">Eb7</text>
+<text x="100.0" y="42" text-anchor="middle" font-family="'SF Pro Text', 'Helvetica Neue', sans-serif" font-size="12" fill="#8888aa" letter-spacing="0.5">Shell (5th str)</text>
+<text x="22" y="90.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#666680">6fr</text>
+<line x1="40" y1="70" x2="160" y2="70" stroke="#444466" stroke-width="1.5" opacity="0.6"/>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="160" x2="160" y2="160" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="190" x2="160" y2="190" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="220" x2="160" y2="220" stroke="#444466" stroke-width="1.5" opacity="0.3"/>
+<line x1="40" y1="70" x2="40" y2="220" stroke="#555577" stroke-width="2.2" opacity="0.5"/>
+<line x1="64" y1="70" x2="64" y2="220" stroke="#555577" stroke-width="1.9500000000000002" opacity="0.5"/>
+<line x1="88" y1="70" x2="88" y2="220" stroke="#555577" stroke-width="1.7000000000000002" opacity="0.5"/>
+<line x1="112" y1="70" x2="112" y2="220" stroke="#555577" stroke-width="1.4500000000000002" opacity="0.5"/>
+<line x1="136" y1="70" x2="136" y2="220" stroke="#555577" stroke-width="1.2000000000000002" opacity="0.5"/>
+<line x1="160" y1="70" x2="160" y2="220" stroke="#555577" stroke-width="0.9500000000000002" opacity="0.5"/>
+<line x1="35" y1="51" x2="45" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="45" y1="51" x2="35" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="64" cy="85.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="64" cy="85.0" r="8" fill="#6c63ff" />
+<circle cx="64" cy="85.0" r="8" fill="url(#dotGrad)"/>
+<circle cx="88" cy="115.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="88" cy="115.0" r="8" fill="#6c63ff" />
+<circle cx="88" cy="115.0" r="8" fill="url(#dotGrad)"/>
+<text x="88" y="119.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">b7</text>
+<circle cx="112" cy="145.0" r="10" fill="rgba(108, 99, 255, 0.3)" filter="url(#dotglow)"/>
+<circle cx="112" cy="145.0" r="8" fill="#6c63ff" />
+<circle cx="112" cy="145.0" r="8" fill="url(#dotGrad)"/>
+<text x="112" y="149.0" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="white" font-weight="600">3</text>
+<line x1="131" y1="51" x2="141" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="141" y1="51" x2="131" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="155" y1="51" x2="165" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="165" y1="51" x2="155" y2="61" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+        <div class="voicing-desc">Shell (5th str) voicing</div>
+        <div class="audio-controls">
+          <button class="play-btn" onclick="playChord('g23')" title="Play chord">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <button class="arp-btn" onclick="arpeggiateChord('g23')" title="Arpeggiate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,4h4v4H3V4 M9,8h4v4H9V8 M15,12h4v4h-4V12 M3,16h4v4H3V16"/></svg>
+          </button>
+        </div>
+        <div class="rating-row" data-card="g23">
+          <button class="tag-btn" onclick="rate('g23','love')">love</button>
+          <button class="tag-btn" onclick="rate('g23','fine')">fine</button>
+          <button class="tag-btn" onclick="rate('g23','awkward')">awkward</button>
+          <button class="tag-btn" onclick="rate('g23','muddy')">muddy</button>
+          <button class="tag-btn" onclick="rate('g23','too basic')">too basic</button>
+          <button class="tag-btn" onclick="rate('g23','too complex')">too complex</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="day-rating">
+    <div class="day-rating-label">How was today's session?</div>
+    <div class="stars">
+      <button class="star-btn" onclick="starRate(1)">1</button>
+      <button class="star-btn" onclick="starRate(2)">2</button>
+      <button class="star-btn" onclick="starRate(3)">3</button>
+      <button class="star-btn" onclick="starRate(4)">4</button>
+      <button class="star-btn" onclick="starRate(5)">5</button>
+    </div>
+    <div class="notes-field">
+      <textarea id="day-notes" placeholder="Any notes about today's voicings..."></textarea>
+    </div>
+    <button class="save-btn" onclick="saveRatings()">Save Ratings</button>
+    <div class="save-status" id="save-status">Saved to localStorage</div>
+  </div>
+
+  <div style="text-align:center; margin-top: 30px;">
+    <a class="nav-link" href="index.html">← Back to catalog</a>
+  </div>
+
+  <div class="footer">VOICING TRAINER</div>
+</div>
+
+<!-- Tone.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<script>
+const AUDIO_DATA = [{"id": "p0", "notes": ["Ab3", "C4", "Eb4", "Gb4"], "type": "piano"}, {"id": "p1", "notes": ["Ab3", "C4", "Gb4"], "type": "piano"}, {"id": "p2", "notes": ["Eb3", "Ab3", "C4", "Gb4"], "type": "piano"}, {"id": "p3", "notes": ["Db3", "F3", "Ab3", "B3"], "type": "piano"}, {"id": "p4", "notes": ["Db3", "F3", "B3"], "type": "piano"}, {"id": "p5", "notes": ["Ab2", "Db3", "F3", "B3"], "type": "piano"}, {"id": "p6", "notes": ["Eb3", "G3", "Bb3", "Db4"], "type": "piano"}, {"id": "p7", "notes": ["Eb3", "G3", "Db4"], "type": "piano"}, {"id": "p8", "notes": ["Bb2", "Eb3", "G3", "Db4"], "type": "piano"}, {"id": "g9", "notes": ["Ab2", "G3", "C4", "Eb4", "Ab4"], "type": "guitar"}, {"id": "g10", "notes": ["Ab3", "Eb4", "Gb4", "C5", "Eb5"], "type": "guitar"}, {"id": "g11", "notes": ["Ab3", "Eb4", "Gb4", "C5"], "type": "guitar"}, {"id": "g12", "notes": ["Ab2", "G3", "Db4"], "type": "guitar"}, {"id": "g13", "notes": ["Ab3", "D4", "Ab4"], "type": "guitar"}, {"id": "g14", "notes": ["Db3", "C4", "F4", "Ab4", "Db5"], "type": "guitar"}, {"id": "g15", "notes": ["Db3", "Ab3", "B3", "F4", "Ab4"], "type": "guitar"}, {"id": "g16", "notes": ["Db4", "Ab4", "B4", "F5"], "type": "guitar"}, {"id": "g17", "notes": ["Db3", "C4", "Gb4"], "type": "guitar"}, {"id": "g18", "notes": ["Db3", "G3", "Db4"], "type": "guitar"}, {"id": "g19", "notes": ["Eb3", "D4", "G4", "Bb4", "Eb5"], "type": "guitar"}, {"id": "g20", "notes": ["Eb3", "Bb3", "Db4", "G4", "Bb4"], "type": "guitar"}, {"id": "g21", "notes": ["Eb3", "Bb3", "Db4", "G4"], "type": "guitar"}, {"id": "g22", "notes": ["Eb3", "D4", "Ab4"], "type": "guitar"}, {"id": "g23", "notes": ["Eb3", "A3", "Eb4"], "type": "guitar"}];
+
+// Synths
+let pianoSynth = null;
+let guitarSynth = null;
+
+function initAudio() {
+  if (pianoSynth) return;
+  pianoSynth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: "triangle8" },
+    envelope: { attack: 0.02, decay: 0.8, sustain: 0.3, release: 1.5 },
+    volume: -8,
+  }).toDestination();
+
+  guitarSynth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: "sawtooth8" },
+    envelope: { attack: 0.005, decay: 0.5, sustain: 0.15, release: 0.8 },
+    volume: -12,
+  }).toDestination();
+}
+
+function getSynth(type) {
+  return type === 'guitar' ? guitarSynth : pianoSynth;
+}
+
+async function playChord(id) {
+  await Tone.start();
+  initAudio();
+  const data = AUDIO_DATA.find(d => d.id === id);
+  if (!data || !data.notes.length) return;
+  const synth = getSynth(data.type);
+  synth.releaseAll();
+  synth.triggerAttackRelease(data.notes, "2n");
+
+  // Visual feedback
+  const card = document.getElementById('card-' + id);
+  card.style.boxShadow = '0 0 30px rgba(108, 99, 255, 0.3)';
+  setTimeout(() => card.style.boxShadow = '', 600);
+}
+
+async function arpeggiateChord(id) {
+  await Tone.start();
+  initAudio();
+  const data = AUDIO_DATA.find(d => d.id === id);
+  if (!data || !data.notes.length) return;
+  const synth = getSynth(data.type);
+  synth.releaseAll();
+
+  const now = Tone.now();
+  const spacing = data.type === 'guitar' ? 0.06 : 0.12;
+  data.notes.forEach((note, i) => {
+    synth.triggerAttackRelease(note, "2n", now + i * spacing);
+  });
+
+  const card = document.getElementById('card-' + id);
+  card.style.boxShadow = '0 0 30px rgba(108, 99, 255, 0.3)';
+  setTimeout(() => card.style.boxShadow = '', 600 + data.notes.length * spacing * 1000);
+}
+
+// ─── Ratings ────────────────────────────────────────────────────
+
+const DAY_KEY = '2026-04-25';
+
+function loadRatings() {
+  const raw = localStorage.getItem('voicing-ratings-' + DAY_KEY);
+  return raw ? JSON.parse(raw) : { tags: {}, stars: 0, notes: '' };
+}
+
+function saveToStorage(ratings) {
+  localStorage.setItem('voicing-ratings-' + DAY_KEY, JSON.stringify(ratings));
+}
+
+function rate(cardId, tag) {
+  const ratings = loadRatings();
+  if (!ratings.tags[cardId]) ratings.tags[cardId] = [];
+  const idx = ratings.tags[cardId].indexOf(tag);
+  if (idx >= 0) {
+    ratings.tags[cardId].splice(idx, 1);
+  } else {
+    ratings.tags[cardId] = [tag]; // one tag per card
+  }
+  saveToStorage(ratings);
+  renderTags();
+}
+
+function starRate(n) {
+  const ratings = loadRatings();
+  ratings.stars = n;
+  saveToStorage(ratings);
+  renderStars();
+}
+
+function saveRatings() {
+  const ratings = loadRatings();
+  ratings.notes = document.getElementById('day-notes').value;
+  saveToStorage(ratings);
+  const el = document.getElementById('save-status');
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+function renderTags() {
+  const ratings = loadRatings();
+  document.querySelectorAll('.tag-btn').forEach(btn => {
+    const row = btn.closest('.rating-row');
+    const cardId = row.dataset.card;
+    const tag = btn.textContent;
+    const tags = ratings.tags[cardId] || [];
+    btn.classList.toggle('active', tags.includes(tag));
+  });
+}
+
+function renderStars() {
+  const ratings = loadRatings();
+  document.querySelectorAll('.star-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i < ratings.stars);
+  });
+}
+
+function initRatings() {
+  const ratings = loadRatings();
+  renderTags();
+  renderStars();
+  if (ratings.notes) document.getElementById('day-notes').value = ratings.notes;
+}
+
+document.addEventListener('DOMContentLoaded', initRatings);
+</script>
+</body></html>

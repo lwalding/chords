@@ -407,6 +407,24 @@
         "C7"
       ],
       "file": "days/2026-04-24.html"
+    },
+    {
+      "date": "2026-04-25",
+      "day_number": 24,
+      "week_number": 4,
+      "key": "Ab",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Shell Voicings",
+      "levels": [
+        "basic",
+        "intermediate"
+      ],
+      "chords": [
+        "Ab7",
+        "Db7",
+        "Eb7"
+      ],
+      "file": "days/2026-04-25.html"
     }
   ]
 }
