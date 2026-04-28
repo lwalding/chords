@@ -462,6 +462,24 @@
         "G7"
       ],
       "file": "days/2026-04-27.html"
+    },
+    {
+      "date": "2026-04-28",
+      "day_number": 27,
+      "week_number": 4,
+      "key": "D",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Shell Voicings",
+      "levels": [
+        "basic",
+        "intermediate"
+      ],
+      "chords": [
+        "D7",
+        "G7",
+        "A7"
+      ],
+      "file": "days/2026-04-28.html"
     }
   ]
 }
