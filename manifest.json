@@ -480,6 +480,24 @@
         "A7"
       ],
       "file": "days/2026-04-28.html"
+    },
+    {
+      "date": "2026-04-29",
+      "day_number": 28,
+      "week_number": 4,
+      "key": "Bb",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Shell Voicings",
+      "levels": [
+        "basic",
+        "intermediate"
+      ],
+      "chords": [
+        "Bb7",
+        "Eb7",
+        "F7"
+      ],
+      "file": "days/2026-04-29.html"
     }
   ]
 }
