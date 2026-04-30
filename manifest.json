@@ -498,6 +498,24 @@
         "F7"
       ],
       "file": "days/2026-04-29.html"
+    },
+    {
+      "date": "2026-04-30",
+      "day_number": 29,
+      "week_number": 5,
+      "key": "G",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Drop 2 Voicings",
+      "levels": [
+        "intermediate"
+      ],
+      "chords": [
+        "Gmaj7",
+        "Em7",
+        "Am7",
+        "D7"
+      ],
+      "file": "days/2026-04-30.html"
     }
   ]
 }
