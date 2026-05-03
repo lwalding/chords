@@ -552,6 +552,24 @@
         "Ab7"
       ],
       "file": "days/2026-05-02.html"
+    },
+    {
+      "date": "2026-05-03",
+      "day_number": 32,
+      "week_number": 5,
+      "key": "Db",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Drop 2 Voicings",
+      "levels": [
+        "intermediate"
+      ],
+      "chords": [
+        "Dbmaj7",
+        "Bbm7",
+        "Ebm7",
+        "Ab7"
+      ],
+      "file": "days/2026-05-03.html"
     }
   ]
 }
