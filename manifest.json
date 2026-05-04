@@ -570,6 +570,24 @@
         "Ab7"
       ],
       "file": "days/2026-05-03.html"
+    },
+    {
+      "date": "2026-05-04",
+      "day_number": 33,
+      "week_number": 5,
+      "key": "C",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Drop 2 Voicings",
+      "levels": [
+        "intermediate"
+      ],
+      "chords": [
+        "Cmaj7",
+        "Am7",
+        "Dm7",
+        "G7"
+      ],
+      "file": "days/2026-05-04.html"
     }
   ]
 }
