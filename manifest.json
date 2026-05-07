@@ -622,6 +622,23 @@
         "Gmaj7"
       ],
       "file": "days/2026-05-06.html"
+    },
+    {
+      "date": "2026-05-07",
+      "day_number": 36,
+      "week_number": 6,
+      "key": "Db",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Drop 2 Voicings",
+      "levels": [
+        "intermediate"
+      ],
+      "chords": [
+        "Ebm7",
+        "Ab7",
+        "Dbmaj7"
+      ],
+      "file": "days/2026-05-07.html"
     }
   ]
 }
