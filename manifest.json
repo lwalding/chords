@@ -639,6 +639,23 @@
         "Dbmaj7"
       ],
       "file": "days/2026-05-07.html"
+    },
+    {
+      "date": "2026-05-08",
+      "day_number": 37,
+      "week_number": 6,
+      "key": "D",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Drop 2 Voicings",
+      "levels": [
+        "intermediate"
+      ],
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7"
+      ],
+      "file": "days/2026-05-08.html"
     }
   ]
 }
