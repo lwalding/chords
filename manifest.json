@@ -690,6 +690,24 @@
         "Gmaj7"
       ],
       "file": "days/2026-05-10.html"
+    },
+    {
+      "date": "2026-05-11",
+      "day_number": 40,
+      "week_number": 6,
+      "key": "E",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Drop 2 Voicings",
+      "levels": [
+        "intermediate"
+      ],
+      "chords": [
+        "Emaj7",
+        "Dbm7",
+        "Gbm7",
+        "B7"
+      ],
+      "file": "days/2026-05-11.html"
     }
   ]
 }
