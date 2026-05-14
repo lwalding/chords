@@ -744,6 +744,24 @@
         "C7"
       ],
       "file": "days/2026-05-13.html"
+    },
+    {
+      "date": "2026-05-14",
+      "day_number": 43,
+      "week_number": 7,
+      "key": "Eb",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Rootless Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Fm7",
+        "Bb7",
+        "Ebmaj7"
+      ],
+      "file": "days/2026-05-14.html"
     }
   ]
 }
