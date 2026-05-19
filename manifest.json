@@ -836,6 +836,24 @@
         "Dbmaj7"
       ],
       "file": "days/2026-05-18.html"
+    },
+    {
+      "date": "2026-05-19",
+      "day_number": 48,
+      "week_number": 7,
+      "key": "F",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Rootless Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gm7",
+        "C7",
+        "Fmaj7"
+      ],
+      "file": "days/2026-05-19.html"
     }
   ]
 }
