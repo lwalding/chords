@@ -873,6 +873,25 @@
         "A7"
       ],
       "file": "days/2026-05-20.html"
+    },
+    {
+      "date": "2026-05-21",
+      "day_number": 50,
+      "week_number": 8,
+      "key": "Gb",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Rootless Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gbmaj7",
+        "Ebm7",
+        "Abm7",
+        "Db7"
+      ],
+      "file": "days/2026-05-21.html"
     }
   ]
 }
