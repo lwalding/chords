@@ -910,6 +910,24 @@
         "Gbmaj7"
       ],
       "file": "days/2026-05-22.html"
+    },
+    {
+      "date": "2026-05-24",
+      "day_number": 53,
+      "week_number": 8,
+      "key": "G",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Rootless Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Am7",
+        "D7",
+        "Gmaj7"
+      ],
+      "file": "days/2026-05-24.html"
     }
   ]
 }
