@@ -964,6 +964,25 @@
         "Emaj7"
       ],
       "file": "days/2026-05-26.html"
+    },
+    {
+      "date": "2026-05-27",
+      "day_number": 56,
+      "week_number": 8,
+      "key": "Db",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Rootless Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Dbmaj7",
+        "Bbm7",
+        "Ebm7",
+        "Ab7"
+      ],
+      "file": "days/2026-05-27.html"
     }
   ]
 }
