@@ -983,6 +983,24 @@
         "Ab7"
       ],
       "file": "days/2026-05-27.html"
+    },
+    {
+      "date": "2026-05-28",
+      "day_number": 57,
+      "week_number": 9,
+      "key": "E",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Minor Key Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gb\u00f87",
+        "B7(b9)",
+        "Em7"
+      ],
+      "file": "days/2026-05-28.html"
     }
   ]
 }
