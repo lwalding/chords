@@ -1019,6 +1019,24 @@
         "Gmaj7"
       ],
       "file": "days/2026-05-29.html"
+    },
+    {
+      "date": "2026-05-30",
+      "day_number": 59,
+      "week_number": 9,
+      "key": "D",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Minor Key Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7"
+      ],
+      "file": "days/2026-05-30.html"
     }
   ]
 }
