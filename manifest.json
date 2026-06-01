@@ -1055,6 +1055,24 @@
         "Amaj7"
       ],
       "file": "days/2026-05-31.html"
+    },
+    {
+      "date": "2026-06-01",
+      "day_number": 61,
+      "week_number": 9,
+      "key": "A",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Minor Key Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ],
+      "file": "days/2026-06-01.html"
     }
   ]
 }
