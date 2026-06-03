@@ -1091,6 +1091,24 @@
         "Bm7"
       ],
       "file": "days/2026-06-02.html"
+    },
+    {
+      "date": "2026-06-03",
+      "day_number": 63,
+      "week_number": 9,
+      "key": "Eb",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Minor Key Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Fm7",
+        "Bb7",
+        "Ebmaj7"
+      ],
+      "file": "days/2026-06-03.html"
     }
   ]
 }
