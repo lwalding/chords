@@ -1109,6 +1109,24 @@
         "Ebmaj7"
       ],
       "file": "days/2026-06-03.html"
+    },
+    {
+      "date": "2026-06-04",
+      "day_number": 64,
+      "week_number": 10,
+      "key": "A",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Minor Key Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Bm7",
+        "E7",
+        "Amaj7"
+      ],
+      "file": "days/2026-06-04.html"
     }
   ]
 }
