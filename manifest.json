@@ -1145,6 +1145,24 @@
         "Em7"
       ],
       "file": "days/2026-06-05.html"
+    },
+    {
+      "date": "2026-06-06",
+      "day_number": 66,
+      "week_number": 10,
+      "key": "Db",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Minor Key Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Eb\u00f87",
+        "Ab7(b9)",
+        "Dbm7"
+      ],
+      "file": "days/2026-06-06.html"
     }
   ]
 }
