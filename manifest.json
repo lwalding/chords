@@ -1181,6 +1181,24 @@
         "Dmaj7"
       ],
       "file": "days/2026-06-07.html"
+    },
+    {
+      "date": "2026-06-08",
+      "day_number": 68,
+      "week_number": 10,
+      "key": "E",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Minor Key Voicings",
+      "levels": [
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gbm7",
+        "B7",
+        "Emaj7"
+      ],
+      "file": "days/2026-06-08.html"
     }
   ]
 }
