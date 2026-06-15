@@ -1305,6 +1305,24 @@
         "Dbmaj7"
       ],
       "file": "days/2026-06-14.html"
+    },
+    {
+      "date": "2026-06-15",
+      "day_number": 75,
+      "week_number": 11,
+      "key": "B",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Upper Structures & Reharmonization",
+      "levels": [
+        "advanced"
+      ],
+      "chords": [
+        "Ebm7",
+        "Ab7",
+        "Dbm7",
+        "Gb7"
+      ],
+      "file": "days/2026-06-15.html"
     }
   ]
 }
