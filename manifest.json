@@ -1323,6 +1323,24 @@
         "Gb7"
       ],
       "file": "days/2026-06-15.html"
+    },
+    {
+      "date": "2026-06-16",
+      "day_number": 76,
+      "week_number": 11,
+      "key": "Db",
+      "progression": "Rhythm Changes (A section)",
+      "stage": "Upper Structures & Reharmonization",
+      "levels": [
+        "advanced"
+      ],
+      "chords": [
+        "Dbmaj7",
+        "Bbm7",
+        "Ebm7",
+        "Ab7"
+      ],
+      "file": "days/2026-06-16.html"
     }
   ]
 }
