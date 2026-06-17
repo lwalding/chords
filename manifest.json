@@ -1341,6 +1341,23 @@
         "Ab7"
       ],
       "file": "days/2026-06-16.html"
+    },
+    {
+      "date": "2026-06-17",
+      "day_number": 77,
+      "week_number": 11,
+      "key": "E",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Upper Structures & Reharmonization",
+      "levels": [
+        "advanced"
+      ],
+      "chords": [
+        "Gbm7",
+        "B7",
+        "Emaj7"
+      ],
+      "file": "days/2026-06-17.html"
     }
   ]
 }
