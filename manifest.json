@@ -1358,6 +1358,24 @@
         "Emaj7"
       ],
       "file": "days/2026-06-17.html"
+    },
+    {
+      "date": "2026-06-18",
+      "day_number": 78,
+      "week_number": 12,
+      "key": "Eb",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Upper Structures & Reharmonization",
+      "levels": [
+        "advanced"
+      ],
+      "chords": [
+        "Gm7",
+        "C7",
+        "Fm7",
+        "Bb7"
+      ],
+      "file": "days/2026-06-18.html"
     }
   ]
 }
