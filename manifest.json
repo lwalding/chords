@@ -1393,6 +1393,23 @@
         "Ebmaj7"
       ],
       "file": "days/2026-06-19.html"
+    },
+    {
+      "date": "2026-06-20",
+      "day_number": 80,
+      "week_number": 12,
+      "key": "C",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Upper Structures & Reharmonization",
+      "levels": [
+        "advanced"
+      ],
+      "chords": [
+        "Dm7",
+        "G7",
+        "Cmaj7"
+      ],
+      "file": "days/2026-06-20.html"
     }
   ]
 }
