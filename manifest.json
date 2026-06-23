@@ -1445,6 +1445,23 @@
         "B7"
       ],
       "file": "days/2026-06-22.html"
+    },
+    {
+      "date": "2026-06-23",
+      "day_number": 83,
+      "week_number": 12,
+      "key": "D",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Upper Structures & Reharmonization",
+      "levels": [
+        "advanced"
+      ],
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7"
+      ],
+      "file": "days/2026-06-23.html"
     }
   ]
 }
