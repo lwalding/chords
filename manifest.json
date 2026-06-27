@@ -1519,6 +1519,26 @@
         "D7"
       ],
       "file": "days/2026-06-26.html"
+    },
+    {
+      "date": "2026-06-27",
+      "day_number": 87,
+      "week_number": 13,
+      "key": "G",
+      "progression": "Rhythm Changes (A section)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gmaj7",
+        "Em7",
+        "Am7",
+        "D7"
+      ],
+      "file": "days/2026-06-27.html"
     }
   ]
 }
