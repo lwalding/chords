@@ -1579,6 +1579,25 @@
         "C7"
       ],
       "file": "days/2026-06-29.html"
+    },
+    {
+      "date": "2026-06-30",
+      "day_number": 90,
+      "week_number": 13,
+      "key": "D",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7"
+      ],
+      "file": "days/2026-06-30.html"
     }
   ]
 }
