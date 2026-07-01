@@ -1598,6 +1598,26 @@
         "Dmaj7"
       ],
       "file": "days/2026-06-30.html"
+    },
+    {
+      "date": "2026-07-01",
+      "day_number": 91,
+      "week_number": 13,
+      "key": "C",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Em7",
+        "A7",
+        "Dm7",
+        "G7"
+      ],
+      "file": "days/2026-07-01.html"
     }
   ]
 }
