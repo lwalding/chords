@@ -1618,6 +1618,26 @@
         "G7"
       ],
       "file": "days/2026-07-01.html"
+    },
+    {
+      "date": "2026-07-02",
+      "day_number": 92,
+      "week_number": 14,
+      "key": "Bb",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Bbmaj7",
+        "Gm7",
+        "Cm7",
+        "F7"
+      ],
+      "file": "days/2026-07-02.html"
     }
   ]
 }
