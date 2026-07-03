@@ -1638,6 +1638,25 @@
         "F7"
       ],
       "file": "days/2026-07-02.html"
+    },
+    {
+      "date": "2026-07-03",
+      "day_number": 93,
+      "week_number": 14,
+      "key": "G",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "A\u00f87",
+        "D7(b9)",
+        "Gm7"
+      ],
+      "file": "days/2026-07-03.html"
     }
   ]
 }
