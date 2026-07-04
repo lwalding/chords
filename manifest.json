@@ -1657,6 +1657,26 @@
         "Gm7"
       ],
       "file": "days/2026-07-03.html"
+    },
+    {
+      "date": "2026-07-04",
+      "day_number": 94,
+      "week_number": 14,
+      "key": "Gb",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gbmaj7",
+        "Ebm7",
+        "Abm7",
+        "Db7"
+      ],
+      "file": "days/2026-07-04.html"
     }
   ]
 }
