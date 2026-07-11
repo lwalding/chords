@@ -1795,6 +1795,26 @@
         "Dbmaj7"
       ],
       "file": "days/2026-07-10.html"
+    },
+    {
+      "date": "2026-07-11",
+      "day_number": 101,
+      "week_number": 15,
+      "key": "D",
+      "progression": "Rhythm Changes (A section)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Dmaj7",
+        "Bm7",
+        "Em7",
+        "A7"
+      ],
+      "file": "days/2026-07-11.html"
     }
   ]
 }
