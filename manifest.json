@@ -1855,6 +1855,25 @@
         "C7"
       ],
       "file": "days/2026-07-13.html"
+    },
+    {
+      "date": "2026-07-14",
+      "day_number": 104,
+      "week_number": 15,
+      "key": "Eb",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Fm7",
+        "Bb7",
+        "Ebmaj7"
+      ],
+      "file": "days/2026-07-14.html"
     }
   ]
 }
