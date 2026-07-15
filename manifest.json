@@ -1874,6 +1874,26 @@
         "Ebmaj7"
       ],
       "file": "days/2026-07-14.html"
+    },
+    {
+      "date": "2026-07-15",
+      "day_number": 105,
+      "week_number": 15,
+      "key": "C",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Cmaj7",
+        "Am7",
+        "Dm7",
+        "G7"
+      ],
+      "file": "days/2026-07-15.html"
     }
   ]
 }
