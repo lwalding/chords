@@ -1894,6 +1894,25 @@
         "G7"
       ],
       "file": "days/2026-07-15.html"
+    },
+    {
+      "date": "2026-07-16",
+      "day_number": 106,
+      "week_number": 16,
+      "key": "C",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "C7",
+        "F7",
+        "G7"
+      ],
+      "file": "days/2026-07-16.html"
     }
   ]
 }
