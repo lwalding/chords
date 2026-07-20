@@ -1972,6 +1972,25 @@
         "Bb7"
       ],
       "file": "days/2026-07-19.html"
+    },
+    {
+      "date": "2026-07-20",
+      "day_number": 110,
+      "week_number": 16,
+      "key": "F",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "F7",
+        "Bb7",
+        "C7"
+      ],
+      "file": "days/2026-07-20.html"
     }
   ]
 }
