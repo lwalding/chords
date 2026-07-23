@@ -2030,6 +2030,25 @@
         "Gb7"
       ],
       "file": "days/2026-07-22.html"
+    },
+    {
+      "date": "2026-07-23",
+      "day_number": 113,
+      "week_number": 17,
+      "key": "Eb",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Eb7",
+        "Ab7",
+        "Bb7"
+      ],
+      "file": "days/2026-07-23.html"
     }
   ]
 }
