@@ -2049,6 +2049,26 @@
         "Bb7"
       ],
       "file": "days/2026-07-23.html"
+    },
+    {
+      "date": "2026-07-24",
+      "day_number": 114,
+      "week_number": 17,
+      "key": "Bb",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Dm7",
+        "G7",
+        "Cm7",
+        "F7"
+      ],
+      "file": "days/2026-07-24.html"
     }
   ]
 }
