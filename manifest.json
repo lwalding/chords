@@ -2108,6 +2108,26 @@
         "Abm7"
       ],
       "file": "days/2026-07-26.html"
+    },
+    {
+      "date": "2026-07-27",
+      "day_number": 117,
+      "week_number": 17,
+      "key": "Ab",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Cm7",
+        "F7",
+        "Bbm7",
+        "Eb7"
+      ],
+      "file": "days/2026-07-27.html"
     }
   ]
 }
