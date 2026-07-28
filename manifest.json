@@ -2128,6 +2128,26 @@
         "Eb7"
       ],
       "file": "days/2026-07-27.html"
+    },
+    {
+      "date": "2026-07-28",
+      "day_number": 118,
+      "week_number": 17,
+      "key": "F",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Fmaj7",
+        "Dm7",
+        "Gm7",
+        "C7"
+      ],
+      "file": "days/2026-07-28.html"
     }
   ]
 }
