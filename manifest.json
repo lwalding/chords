@@ -2168,6 +2168,26 @@
         "Bb7"
       ],
       "file": "days/2026-07-29.html"
+    },
+    {
+      "date": "2026-07-30",
+      "day_number": 120,
+      "week_number": 18,
+      "key": "Eb",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Ebmaj7",
+        "Cm7",
+        "Fm7",
+        "Bb7"
+      ],
+      "file": "days/2026-07-30.html"
     }
   ]
 }
