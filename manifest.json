@@ -2207,6 +2207,25 @@
         "Abm7"
       ],
       "file": "days/2026-07-31.html"
+    },
+    {
+      "date": "2026-08-01",
+      "day_number": 122,
+      "week_number": 18,
+      "key": "E",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gbm7",
+        "B7",
+        "Emaj7"
+      ],
+      "file": "days/2026-08-01.html"
     }
   ]
 }
