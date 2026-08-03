@@ -2245,6 +2245,25 @@
         "Ab7"
       ],
       "file": "days/2026-08-02.html"
+    },
+    {
+      "date": "2026-08-03",
+      "day_number": 124,
+      "week_number": 18,
+      "key": "Bb",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Bb7",
+        "Eb7",
+        "F7"
+      ],
+      "file": "days/2026-08-03.html"
     }
   ]
 }
