@@ -2342,6 +2342,25 @@
         "Em7"
       ],
       "file": "days/2026-08-07.html"
+    },
+    {
+      "date": "2026-08-08",
+      "day_number": 129,
+      "week_number": 19,
+      "key": "Eb",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "F\u00f87",
+        "Bb7(b9)",
+        "Ebm7"
+      ],
+      "file": "days/2026-08-08.html"
     }
   ]
 }
