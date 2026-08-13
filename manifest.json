@@ -2438,6 +2438,26 @@
         "B7"
       ],
       "file": "days/2026-08-12.html"
+    },
+    {
+      "date": "2026-08-13",
+      "day_number": 134,
+      "week_number": 20,
+      "key": "Db",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Fm7",
+        "Bb7",
+        "Ebm7",
+        "Ab7"
+      ],
+      "file": "days/2026-08-13.html"
     }
   ]
 }
