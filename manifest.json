@@ -2458,6 +2458,25 @@
         "Ab7"
       ],
       "file": "days/2026-08-13.html"
+    },
+    {
+      "date": "2026-08-14",
+      "day_number": 135,
+      "week_number": 20,
+      "key": "Gb",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Ab\u00f87",
+        "Db7(b9)",
+        "Gbm7"
+      ],
+      "file": "days/2026-08-14.html"
     }
   ]
 }
