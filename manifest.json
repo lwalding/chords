@@ -2477,6 +2477,25 @@
         "Gbm7"
       ],
       "file": "days/2026-08-14.html"
+    },
+    {
+      "date": "2026-08-15",
+      "day_number": 136,
+      "week_number": 20,
+      "key": "E",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "E7",
+        "A7",
+        "B7"
+      ],
+      "file": "days/2026-08-15.html"
     }
   ]
 }
