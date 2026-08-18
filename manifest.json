@@ -2536,6 +2536,26 @@
         "Gb7"
       ],
       "file": "days/2026-08-17.html"
+    },
+    {
+      "date": "2026-08-18",
+      "day_number": 139,
+      "week_number": 20,
+      "key": "F",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Am7",
+        "D7",
+        "Gm7",
+        "C7"
+      ],
+      "file": "days/2026-08-18.html"
     }
   ]
 }
