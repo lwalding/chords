@@ -2635,6 +2635,26 @@
         "E7"
       ],
       "file": "days/2026-08-22.html"
+    },
+    {
+      "date": "2026-08-23",
+      "day_number": 144,
+      "week_number": 21,
+      "key": "B",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Bmaj7",
+        "Abm7",
+        "Dbm7",
+        "Gb7"
+      ],
+      "file": "days/2026-08-23.html"
     }
   ]
 }
