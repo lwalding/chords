@@ -2655,6 +2655,25 @@
         "Gb7"
       ],
       "file": "days/2026-08-23.html"
+    },
+    {
+      "date": "2026-08-24",
+      "day_number": 145,
+      "week_number": 21,
+      "key": "Db",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Ebm7",
+        "Ab7",
+        "Dbmaj7"
+      ],
+      "file": "days/2026-08-24.html"
     }
   ]
 }
