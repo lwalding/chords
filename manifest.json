@@ -2751,6 +2751,26 @@
         "Bb7"
       ],
       "file": "days/2026-08-28.html"
+    },
+    {
+      "date": "2026-08-29",
+      "day_number": 150,
+      "week_number": 22,
+      "key": "Db",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Dbmaj7",
+        "Bbm7",
+        "Ebm7",
+        "Ab7"
+      ],
+      "file": "days/2026-08-29.html"
     }
   ]
 }
