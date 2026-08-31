@@ -2790,6 +2790,25 @@
         "Db7"
       ],
       "file": "days/2026-08-30.html"
+    },
+    {
+      "date": "2026-08-31",
+      "day_number": 152,
+      "week_number": 22,
+      "key": "C",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "C7",
+        "F7",
+        "G7"
+      ],
+      "file": "days/2026-08-31.html"
     }
   ]
 }
