@@ -2809,6 +2809,25 @@
         "G7"
       ],
       "file": "days/2026-08-31.html"
+    },
+    {
+      "date": "2026-09-01",
+      "day_number": 153,
+      "week_number": 22,
+      "key": "E",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gbm7",
+        "B7",
+        "Emaj7"
+      ],
+      "file": "days/2026-09-01.html"
     }
   ]
 }
