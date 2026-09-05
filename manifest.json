@@ -2886,6 +2886,25 @@
         "G7"
       ],
       "file": "days/2026-09-04.html"
+    },
+    {
+      "date": "2026-09-05",
+      "day_number": 157,
+      "week_number": 23,
+      "key": "F",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "F7",
+        "Bb7",
+        "C7"
+      ],
+      "file": "days/2026-09-05.html"
     }
   ]
 }
