@@ -2945,6 +2945,25 @@
         "A7"
       ],
       "file": "days/2026-09-07.html"
+    },
+    {
+      "date": "2026-09-08",
+      "day_number": 160,
+      "week_number": 23,
+      "key": "E",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gb\u00f87",
+        "B7(b9)",
+        "Em7"
+      ],
+      "file": "days/2026-09-08.html"
     }
   ]
 }
