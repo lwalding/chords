@@ -3043,6 +3043,25 @@
         "Db7"
       ],
       "file": "days/2026-09-12.html"
+    },
+    {
+      "date": "2026-09-13",
+      "day_number": 165,
+      "week_number": 24,
+      "key": "C",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "C7",
+        "F7",
+        "G7"
+      ],
+      "file": "days/2026-09-13.html"
     }
   ]
 }
