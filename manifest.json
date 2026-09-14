@@ -3062,6 +3062,25 @@
         "G7"
       ],
       "file": "days/2026-09-13.html"
+    },
+    {
+      "date": "2026-09-14",
+      "day_number": 166,
+      "week_number": 24,
+      "key": "A",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "B\u00f87",
+        "E7(b9)",
+        "Am7"
+      ],
+      "file": "days/2026-09-14.html"
     }
   ]
 }
