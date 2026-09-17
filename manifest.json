@@ -3120,6 +3120,26 @@
         "G7"
       ],
       "file": "days/2026-09-16.html"
+    },
+    {
+      "date": "2026-09-17",
+      "day_number": 169,
+      "week_number": 25,
+      "key": "D",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Dmaj7",
+        "Bm7",
+        "Em7",
+        "A7"
+      ],
+      "file": "days/2026-09-17.html"
     }
   ]
 }
