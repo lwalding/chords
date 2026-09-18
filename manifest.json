@@ -3140,6 +3140,26 @@
         "A7"
       ],
       "file": "days/2026-09-17.html"
+    },
+    {
+      "date": "2026-09-18",
+      "day_number": 170,
+      "week_number": 25,
+      "key": "E",
+      "progression": "Rhythm Changes (A section)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Emaj7",
+        "Dbm7",
+        "Gbm7",
+        "B7"
+      ],
+      "file": "days/2026-09-18.html"
     }
   ]
 }
