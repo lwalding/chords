@@ -3217,6 +3217,25 @@
         "Ebmaj7"
       ],
       "file": "days/2026-09-21.html"
+    },
+    {
+      "date": "2026-09-22",
+      "day_number": 174,
+      "week_number": 25,
+      "key": "Ab",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Bbm7",
+        "Eb7",
+        "Abmaj7"
+      ],
+      "file": "days/2026-09-22.html"
     }
   ]
 }
