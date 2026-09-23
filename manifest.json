@@ -3236,6 +3236,26 @@
         "Abmaj7"
       ],
       "file": "days/2026-09-22.html"
+    },
+    {
+      "date": "2026-09-23",
+      "day_number": 175,
+      "week_number": 25,
+      "key": "F",
+      "progression": "Rhythm Changes (A section)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Fmaj7",
+        "Dm7",
+        "Gm7",
+        "C7"
+      ],
+      "file": "days/2026-09-23.html"
     }
   ]
 }
