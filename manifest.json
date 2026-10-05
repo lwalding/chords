@@ -3469,6 +3469,25 @@
         "B7"
       ],
       "file": "days/2026-10-04.html"
+    },
+    {
+      "date": "2026-10-05",
+      "day_number": 187,
+      "week_number": 27,
+      "key": "F",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "G\u00f87",
+        "C7(b9)",
+        "Fm7"
+      ],
+      "file": "days/2026-10-05.html"
     }
   ]
 }
