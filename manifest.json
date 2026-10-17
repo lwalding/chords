@@ -3703,6 +3703,25 @@
         "Gbmaj7"
       ],
       "file": "days/2026-10-16.html"
+    },
+    {
+      "date": "2026-10-17",
+      "day_number": 199,
+      "week_number": 29,
+      "key": "Gb",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gb7",
+        "B7",
+        "Db7"
+      ],
+      "file": "days/2026-10-17.html"
     }
   ]
 }
