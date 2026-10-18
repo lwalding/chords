@@ -3722,6 +3722,26 @@
         "Db7"
       ],
       "file": "days/2026-10-17.html"
+    },
+    {
+      "date": "2026-10-18",
+      "day_number": 200,
+      "week_number": 29,
+      "key": "Ab",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Abmaj7",
+        "Fm7",
+        "Bbm7",
+        "Eb7"
+      ],
+      "file": "days/2026-10-18.html"
     }
   ]
 }
