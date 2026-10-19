@@ -3742,6 +3742,25 @@
         "Eb7"
       ],
       "file": "days/2026-10-18.html"
+    },
+    {
+      "date": "2026-10-19",
+      "day_number": 201,
+      "week_number": 29,
+      "key": "G",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Am7",
+        "D7",
+        "Gmaj7"
+      ],
+      "file": "days/2026-10-19.html"
     }
   ]
 }
