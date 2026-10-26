@@ -3879,6 +3879,25 @@
         "B7"
       ],
       "file": "days/2026-10-25.html"
+    },
+    {
+      "date": "2026-10-26",
+      "day_number": 208,
+      "week_number": 30,
+      "key": "Gb",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Abm7",
+        "Db7",
+        "Gbmaj7"
+      ],
+      "file": "days/2026-10-26.html"
     }
   ]
 }
