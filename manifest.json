@@ -3937,6 +3937,25 @@
         "B7"
       ],
       "file": "days/2026-10-28.html"
+    },
+    {
+      "date": "2026-10-29",
+      "day_number": 211,
+      "week_number": 31,
+      "key": "Eb",
+      "progression": "ii\u00b0 \u2013 V \u2013 i (minor)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "F\u00f87",
+        "Bb7(b9)",
+        "Ebm7"
+      ],
+      "file": "days/2026-10-29.html"
     }
   ]
 }
