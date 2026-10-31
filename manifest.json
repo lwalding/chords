@@ -3975,6 +3975,26 @@
         "F7"
       ],
       "file": "days/2026-10-30.html"
+    },
+    {
+      "date": "2026-10-31",
+      "day_number": 213,
+      "week_number": 31,
+      "key": "F",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Fmaj7",
+        "Dm7",
+        "Gm7",
+        "C7"
+      ],
+      "file": "days/2026-10-31.html"
     }
   ]
 }
