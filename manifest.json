@@ -3995,6 +3995,26 @@
         "C7"
       ],
       "file": "days/2026-10-31.html"
+    },
+    {
+      "date": "2026-11-01",
+      "day_number": 214,
+      "week_number": 31,
+      "key": "G",
+      "progression": "I \u2013 vi \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gmaj7",
+        "Em7",
+        "Am7",
+        "D7"
+      ],
+      "file": "days/2026-11-01.html"
     }
   ]
 }
