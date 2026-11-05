@@ -4073,6 +4073,25 @@
         "Bmaj7"
       ],
       "file": "days/2026-11-04.html"
+    },
+    {
+      "date": "2026-11-05",
+      "day_number": 218,
+      "week_number": 32,
+      "key": "Db",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Db7",
+        "Gb7",
+        "Ab7"
+      ],
+      "file": "days/2026-11-05.html"
     }
   ]
 }
