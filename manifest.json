@@ -4111,6 +4111,25 @@
         "Ab7"
       ],
       "file": "days/2026-11-06.html"
+    },
+    {
+      "date": "2026-11-07",
+      "day_number": 220,
+      "week_number": 32,
+      "key": "Bb",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Cm7",
+        "F7",
+        "Bbmaj7"
+      ],
+      "file": "days/2026-11-07.html"
     }
   ]
 }
