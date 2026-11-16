@@ -4287,6 +4287,25 @@
         "Gb7"
       ],
       "file": "days/2026-11-15.html"
+    },
+    {
+      "date": "2026-11-16",
+      "day_number": 229,
+      "week_number": 33,
+      "key": "D",
+      "progression": "ii \u2013 V \u2013 I",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Em7",
+        "A7",
+        "Dmaj7"
+      ],
+      "file": "days/2026-11-16.html"
     }
   ]
 }
