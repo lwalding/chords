@@ -4306,6 +4306,26 @@
         "Dmaj7"
       ],
       "file": "days/2026-11-16.html"
+    },
+    {
+      "date": "2026-11-17",
+      "day_number": 230,
+      "week_number": 33,
+      "key": "D",
+      "progression": "iii \u2013 VI \u2013 ii \u2013 V",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "Gbm7",
+        "B7",
+        "Em7",
+        "A7"
+      ],
+      "file": "days/2026-11-17.html"
     }
   ]
 }
