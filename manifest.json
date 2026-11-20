@@ -4365,6 +4365,25 @@
         "Fmaj7"
       ],
       "file": "days/2026-11-19.html"
+    },
+    {
+      "date": "2026-11-20",
+      "day_number": 233,
+      "week_number": 34,
+      "key": "A",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "A7",
+        "D7",
+        "E7"
+      ],
+      "file": "days/2026-11-20.html"
     }
   ]
 }
