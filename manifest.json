@@ -4443,6 +4443,25 @@
         "A7"
       ],
       "file": "days/2026-11-23.html"
+    },
+    {
+      "date": "2026-11-24",
+      "day_number": 237,
+      "week_number": 34,
+      "key": "E",
+      "progression": "Blues (I \u2013 IV \u2013 V)",
+      "stage": "Full Review",
+      "levels": [
+        "basic",
+        "intermediate",
+        "advanced"
+      ],
+      "chords": [
+        "E7",
+        "A7",
+        "B7"
+      ],
+      "file": "days/2026-11-24.html"
     }
   ]
 }
